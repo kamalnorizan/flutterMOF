@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/home.dart';
+import 'package:fluttertutorial/widgets/productbox.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const Productbox(),
     );
   }
 }
