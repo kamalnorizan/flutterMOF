@@ -7,25 +7,31 @@ class Productbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(2),
-      height: 50,
+      height: 130,
       child: Card(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              width: 180,
-              height: 180,
+              width: 110,
+              height: 110,
+              alignment: AlignmentDirectional.centerStart,
               decoration: BoxDecoration(
                 color: Colors.red,
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Text('Text 1'),
-                Text('Text 2'),
-                Text('Text 3'),
-              ],
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Text 1'),
+                    Text('Text 2'),
+                    Text('Text 3'),
+                  ],
+                ),
+              ),
             )
           ],
         ),
