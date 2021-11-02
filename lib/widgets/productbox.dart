@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Productbox extends StatelessWidget {
-  const Productbox({Key? key}) : super(key: key);
-
+  const Productbox({Key? key, this.name,  this.description,  this.price,  this.imageName}) : super(key: key);
+  final String? name;
+  final String? description;
+  final double? price;
+  final String? imageName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,8 +19,13 @@ class Productbox extends StatelessWidget {
               width: 110,
               height: 110,
               alignment: AlignmentDirectional.centerStart,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.red,
+              ),
+              child: Center(
+                child: Text(imageName.toString(), style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),),
               ),
             ),
             Expanded(
@@ -25,10 +33,13 @@ class Productbox extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text('Text 1'),
-                    Text('Text 2'),
-                    Text('Text 3'),
+                  children:  [
+                    Text('Name: '+name.toString(), style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Center(child: Text('Description: '+description.toString(), textAlign: TextAlign.center,)),
+                    Text('Price: '+price.toString()),
                   ],
                 ),
               ),
