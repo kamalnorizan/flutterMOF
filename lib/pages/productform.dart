@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorial/models/product.dart';
 
 class Productform extends StatefulWidget {
   const Productform({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _ProductformState extends State<Productform> {
   TextEditingController priceController = TextEditingController();
 
   TextEditingController imageController = TextEditingController();
-
+  Product product = Product();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,15 @@ class _ProductformState extends State<Productform> {
                     border: InputBorder.none, hintText: 'Product Image'),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  product = Product(
+                      name: nameController.text,
+                      description: descriptionController.text,
+                      price: double.parse(priceController.text),
+                      imageName: imageController.text);
+
+                  Navigator.pop(context, product);
+                },
                 child: const Text('Create'),
               )
             ]),

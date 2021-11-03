@@ -29,30 +29,6 @@ class _HomeState extends State<Home> {
       imageName: 'Tablet',
     ),
     Product(
-      name: 'Tablet',
-      description: 'Tablet is most productive development tool',
-      price: 2300,
-      imageName: 'Tablet',
-    ),
-    Product(
-      name: 'Tablet',
-      description: 'Tablet is most productive development tool',
-      price: 2300,
-      imageName: 'Tablet',
-    ),
-    Product(
-      name: 'Tablet',
-      description: 'Tablet is most productive development tool',
-      price: 2300,
-      imageName: 'Tablet',
-    ),
-    Product(
-      name: 'Tablet',
-      description: 'Tablet is most productive development tool',
-      price: 2300,
-      imageName: 'Tablet',
-    ),
-    Product(
       name: 'Pendrive',
       description: 'Pendrive is a storage medium',
       price: 20,
@@ -76,11 +52,14 @@ class _HomeState extends State<Home> {
             }),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final product = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Productform()),
+              MaterialPageRoute(builder: (context) => const Productform()),
             );
+            setState(() {
+              products.add(product);
+            });
           },
         ),
       ),
