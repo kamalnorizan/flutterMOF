@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorial/models/product.dart';
 
 class Productdetails extends StatefulWidget {
-  const Productdetails(
-      {Key? key, this.name, this.description, this.price, this.imageName})
-      : super(key: key);
-  final String? name;
-  final String? description;
-  final double? price;
-  final String? imageName;
+  Productdetails({Key? key, required this.product}) : super(key: key);
+  var product = Product();
   @override
   State<Productdetails> createState() => _ProductdetailsState();
 }
@@ -17,16 +13,16 @@ class _ProductdetailsState extends State<Productdetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name.toString()),
+        title: Text(widget.product.name.toString()),
       ),
       body: Center(
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.description.toString()),
-              Text(widget.price.toString()),
-              Text(widget.imageName.toString())
+              Text(widget.product.description.toString()),
+              Text(widget.product.price.toString()),
+              Text(widget.product.imageName.toString())
             ],
           ),
         ),

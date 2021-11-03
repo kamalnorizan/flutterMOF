@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorial/models/product.dart';
 import 'package:fluttertutorial/pages/product_details.dart';
 
 class Productbox extends StatelessWidget {
-  const Productbox(
-      {Key? key, this.name, this.description, this.price, this.imageName})
-      : super(key: key);
-  final String? name;
-  final String? description;
-  final double? price;
-  final String? imageName;
+  Productbox({Key? key, required this.product}) : super(key: key);
+
+  var product = Product();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +24,7 @@ class Productbox extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  imageName.toString(),
+                  product.imageName.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -41,26 +38,22 @@ class Productbox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Name: ' + name.toString(),
+                      'Name: ' + product.name.toString(),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Center(
                         child: Text(
-                      'Description: ' + description.toString(),
+                      'Description: ' + product.description.toString(),
                       textAlign: TextAlign.center,
                     )),
-                    Text('Price: ' + price.toString()),
+                    Text('Price: ' + product.price.toString()),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Productdetails(
-                                      name: name,
-                                      description: description,
-                                      price: price,
-                                      imageName: imageName,
-                                    )));
+                                builder: (context) =>
+                                    Productdetails(product: product)));
                       },
                       child: const Text('View Details'),
                     ),
