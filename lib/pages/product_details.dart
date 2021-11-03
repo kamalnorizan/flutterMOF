@@ -16,15 +16,13 @@ class _ProductdetailsState extends State<Productdetails> {
         title: Text(widget.product.name.toString()),
       ),
       body: Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(widget.product.description.toString()),
-              Text(widget.product.price.toString()),
-              Text(widget.product.imageName.toString())
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(widget.product.description.toString()),
+            Text(widget.product.price.toString()),
+            Text(widget.product.imageName.toString())
+          ],
         ),
       ),
     );

@@ -24,44 +24,42 @@ class _ProductformState extends State<Productform> {
         title: const Text('Create New Product'),
       ),
       body: Center(
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Name'),
-              ),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Description'),
-              ),
-              TextField(
-                controller: priceController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Price'),
-              ),
-              TextField(
-                controller: imageController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Product Image'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  product = Product(
-                      name: nameController.text,
-                      description: descriptionController.text,
-                      price: double.parse(priceController.text),
-                      imageName: imageController.text);
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: 'Name'),
+            ),
+            TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: 'Description'),
+            ),
+            TextField(
+              controller: priceController,
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: 'Price'),
+            ),
+            TextField(
+              controller: imageController,
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: 'Product Image'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                product = Product(
+                    name: nameController.text,
+                    description: descriptionController.text,
+                    price: double.parse(priceController.text),
+                    imageName: imageController.text);
 
-                  Navigator.pop(context, product);
-                },
-                child: const Text('Create'),
-              )
-            ]),
-          ),
+                Navigator.pop(context, product);
+              },
+              child: const Text('Create'),
+            )
+          ]),
         ),
       ),
     );

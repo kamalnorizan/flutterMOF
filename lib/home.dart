@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertutorial/models/product.dart';
 import 'package:fluttertutorial/pages/productform.dart';
 import 'package:fluttertutorial/widgets/productbox.dart';
@@ -46,8 +47,21 @@ class _HomeState extends State<Home> {
         body: ListView.builder(
             itemCount: products.length,
             itemBuilder: (BuildContext ctxt, int index) {
-              return Productbox(
-                product: products[index],
+              return Slidable(
+                actionPane: const SlidableDrawerActionPane(),
+                child: Productbox(
+                  product: products[index],
+                ),
+                secondaryActions: [
+                  IconSlideAction(
+                    caption: 'Delete',
+                    color: Colors.redAccent,
+                    icon: Icons.delete,
+                    onTap: () {
+                      print('OK!');
+                    },
+                  )
+                ],
               );
             }),
         floatingActionButton: FloatingActionButton(
