@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/home.dart';
-import 'package:fluttertutorial/widgets/productbox.dart';
 
 void main() {
   runApp(const MyApp());
