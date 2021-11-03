@@ -58,7 +58,9 @@ class _HomeState extends State<Home> {
                     color: Colors.redAccent,
                     icon: Icons.delete,
                     onTap: () {
-                      print('OK!');
+                      setState(() {
+                        products.removeAt(index);
+                      });
                     },
                   )
                 ],
