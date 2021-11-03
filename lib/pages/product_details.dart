@@ -21,7 +21,14 @@ class _ProductdetailsState extends State<Productdetails> {
       ),
       body: Center(
         child: Container(
-          child: const Text('Hello World'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(widget.description.toString()),
+              Text(widget.price.toString()),
+              Text(widget.imageName.toString())
+            ],
+          ),
         ),
       ),
     );
