@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Productdetails extends StatefulWidget {
-  const Productdetails({Key? key}) : super(key: key);
-
+  const Productdetails(
+      {Key? key, this.name, this.description, this.price, this.imageName})
+      : super(key: key);
+  final String? name;
+  final String? description;
+  final double? price;
+  final String? imageName;
   @override
   State<Productdetails> createState() => _ProductdetailsState();
 }
@@ -12,7 +17,7 @@ class _ProductdetailsState extends State<Productdetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Material App Bar'),
+        title: Text(widget.name.toString()),
       ),
       body: Center(
         child: Container(

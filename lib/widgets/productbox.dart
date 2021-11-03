@@ -12,7 +12,7 @@ class Productbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(2),
+      padding: const EdgeInsets.all(2),
       height: 130,
       child: Card(
         child: Row(
@@ -55,7 +55,12 @@ class Productbox extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Productdetails()));
+                                builder: (context) => Productdetails(
+                                      name: name,
+                                      description: description,
+                                      price: price,
+                                      imageName: imageName,
+                                    )));
                       },
                       child: const Text('View Details'),
                     ),
