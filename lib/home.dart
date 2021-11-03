@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/models/product.dart';
+import 'package:fluttertutorial/pages/productform.dart';
 import 'package:fluttertutorial/widgets/productbox.dart';
 
 class Home extends StatefulWidget {
@@ -28,6 +29,30 @@ class _HomeState extends State<Home> {
       imageName: 'Tablet',
     ),
     Product(
+      name: 'Tablet',
+      description: 'Tablet is most productive development tool',
+      price: 2300,
+      imageName: 'Tablet',
+    ),
+    Product(
+      name: 'Tablet',
+      description: 'Tablet is most productive development tool',
+      price: 2300,
+      imageName: 'Tablet',
+    ),
+    Product(
+      name: 'Tablet',
+      description: 'Tablet is most productive development tool',
+      price: 2300,
+      imageName: 'Tablet',
+    ),
+    Product(
+      name: 'Tablet',
+      description: 'Tablet is most productive development tool',
+      price: 2300,
+      imageName: 'Tablet',
+    ),
+    Product(
       name: 'Pendrive',
       description: 'Pendrive is a storage medium',
       price: 20,
@@ -49,6 +74,15 @@ class _HomeState extends State<Home> {
                 product: products[index],
               );
             }),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Productform()),
+            );
+          },
+        ),
       ),
     );
   }
