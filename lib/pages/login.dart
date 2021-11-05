@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorial/services/api.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,25 +25,41 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Email Address',
                   ),
                 ),
-                const TextField(
+                TextField(
+                  controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Password',
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text('Login'))
+                ElevatedButton(
+                    onPressed: () {
+                      _login(context);
+                    },
+                    child: const Text('Login'))
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _login(context) async {
+    var data = {
+      'email': emailController.text,
+      'password': passwordController.text
+    };
+
+    var response = await Callapi().postLogin(data);
+    print(response.body);
   }
 }

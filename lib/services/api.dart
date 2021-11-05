@@ -6,7 +6,7 @@ class Callapi {
   final String _url = "https://masjidku.my/api/";
 
   postLogin(data) {
-    Uri fullUrl = Uri.parse(_url + 'login');
+    Uri fullUrl = Uri.parse(_url + 'apilogin');
     return http.post(fullUrl, body: jsonEncode(data), headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json',
