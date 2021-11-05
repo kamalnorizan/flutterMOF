@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/home.dart';
+import 'package:fluttertutorial/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var isLoggedin = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: isLoggedin ? const Home() : const Login(),
     );
   }
 }
