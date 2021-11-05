@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertutorial/models/product.dart';
 import 'package:fluttertutorial/pages/productform.dart';
 import 'package:fluttertutorial/widgets/productbox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -43,6 +44,30 @@ class _HomeState extends State<Home> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Home Page'),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                ),
+                child: Text('My First Apps'),
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.vpn_key,
+                ),
+                title: const Text('Logout'),
+                onTap: () async {
+                  SharedPreferences localStorage =
+                      await SharedPreferences.getInstance();
+                  localStorage.remove('token');
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
+              )
+            ],
+          ),
         ),
         body: ListView.builder(
             itemCount: products.length,
