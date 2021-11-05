@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/home.dart';
 import 'package:fluttertutorial/pages/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,23 +17,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var isLoggedin = false;
   @override
+  void initState() {
+    super.initState();
+    tokenCheck();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        '/login': (context) => const Login(),
+        '/home': (context) => const Home(),
+      },
       home: isLoggedin ? const Home() : const Login(),
     );
+  }
+
+  tokenCheck() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if (token != null) {
+      setState(() {
+        isLoggedin = true;
+      });
+    }
   }
 }
 

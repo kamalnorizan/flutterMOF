@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/services/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,6 +14,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    emailController.text = 'demo@gmail.com';
+    passwordController.text = 'zLALJdqq';
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,6 +71,21 @@ class _LoginState extends State<Login> {
     };
 
     var response = await Callapi().postLogin(data);
-    print(response.body);
+    var body = json.decode(response.body);
+    // print(body['success'].length);
+    try {
+      if (body['success'].length > 0) {
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', body['success']['token']);
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      print('not success');
+    }
+    // if (body['success'].length > 0) {
+    //   print('success');
+    // } else {
+    //   print('not success');
+    // }
   }
 }
