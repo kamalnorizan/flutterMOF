@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertutorial/models/product.dart';
 import 'package:fluttertutorial/models/todolist.dart';
 import 'package:fluttertutorial/pages/product_details.dart';
 
@@ -25,9 +24,10 @@ class Productbox extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  todolist.title.toString(),
+                  todolist.title![0].toString().toUpperCase(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: 25,
                   ),
                 ),
               ),

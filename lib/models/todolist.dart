@@ -5,18 +5,18 @@ List<Todolist> fromJson(String str) =>
 
 class Todolist {
   Todolist({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.dueDate,
+    this.id,
+    this.title,
+    this.content,
+    this.dueDate,
   });
-  late final int id;
-  late final String title;
-  late final String content;
-  late final String dueDate;
+  String? id;
+  String? title;
+  String? content;
+  String? dueDate;
 
   Todolist.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'].toString();
     title = json['title'];
     content = json['content'];
     dueDate = json['due_date'];

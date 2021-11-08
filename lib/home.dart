@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertutorial/models/product.dart';
 import 'package:fluttertutorial/pages/productform.dart';
 import 'package:fluttertutorial/services/api.dart';
 import 'package:fluttertutorial/widgets/productbox.dart';
@@ -18,12 +17,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
   List<Todolist>? todolists;
   var _isLoading = true;
+
+  @override
   void initState() {
     super.initState();
-    print('log here');
     loadTodoList();
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertutorial/models/product.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:fluttertutorial/models/todolist.dart';
+import 'package:intl/intl.dart';
 
 class Productform extends StatefulWidget {
   const Productform({Key? key}) : super(key: key);
@@ -9,14 +11,22 @@ class Productform extends StatefulWidget {
 }
 
 class _ProductformState extends State<Productform> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
 
   TextEditingController descriptionController = TextEditingController();
 
-  TextEditingController priceController = TextEditingController();
+  TextEditingController duedateController = TextEditingController();
 
-  TextEditingController imageController = TextEditingController();
-  Product product = Product();
+  String? selectedDate;
+
+  Todolist todolist = Todolist();
+
+  @override
+  void initState() {
+    super.initState();
+    // selectedDate = DateFormat('dd-MM-yyyy')
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,34 +38,45 @@ class _ProductformState extends State<Productform> {
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
             TextField(
-              controller: nameController,
+              controller: titleController,
               decoration: const InputDecoration(
-                  border: InputBorder.none, hintText: 'Name'),
+                  border: InputBorder.none, hintText: 'Title'),
             ),
             TextField(
               controller: descriptionController,
               decoration: const InputDecoration(
                   border: InputBorder.none, hintText: 'Description'),
             ),
-            TextField(
-              controller: priceController,
-              decoration: const InputDecoration(
-                  border: InputBorder.none, hintText: 'Price'),
-            ),
-            TextField(
-              controller: imageController,
-              decoration: const InputDecoration(
-                  border: InputBorder.none, hintText: 'Product Image'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      minTime: DateTime(2021, 11, 08),
+                      showTitleActions: true, onChanged: (date) {
+                    setState(() {
+                      selectedDate =
+                          DateFormat("dd-MM-yyyy").format(date).toString();
+                    });
+                  });
+                },
+                child: selectedDate != null
+                    ? Text(
+                        selectedDate.toString(),
+                      )
+                    : const Text(
+                        'Please select due Date',
+                      ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
-                product = Product(
-                    name: nameController.text,
-                    description: descriptionController.text,
-                    price: double.parse(priceController.text),
-                    imageName: imageController.text);
+                todolist = Todolist(
+                    title: titleController.text,
+                    content: descriptionController.text,
+                    dueDate: selectedDate.toString());
 
-                Navigator.pop(context, product);
+                Navigator.pop(context, todolist);
               },
               child: const Text('Create'),
             )
