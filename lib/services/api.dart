@@ -25,4 +25,20 @@ class Callapi {
       'Authorization': 'Bearer $token'
     });
   }
+
+  postWithToken(data, url) async {
+    Uri fullUrl = Uri.parse(_url + url);
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+
+    return http.post(
+      fullUrl,
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(data),
+    );
+  }
 }

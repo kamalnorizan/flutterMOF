@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fluttertutorial/models/todolist.dart';
+import 'package:fluttertutorial/services/api.dart';
 import 'package:intl/intl.dart';
 
 class Productform extends StatefulWidget {
@@ -76,6 +77,7 @@ class _ProductformState extends State<Productform> {
                     content: descriptionController.text,
                     dueDate: selectedDate.toString());
 
+                _storeTodo();
                 Navigator.pop(context, todolist);
               },
               child: const Text('Create'),
@@ -84,5 +86,17 @@ class _ProductformState extends State<Productform> {
         ),
       ),
     );
+  }
+
+  _storeTodo() async {
+    var data = {
+      'title': titleController.text,
+      'content': descriptionController.text,
+      'due_date': DateFormat("yyyy-MM-dd")
+          .format(DateFormat('dd-MM-yyyy').parse(selectedDate.toString()))
+          .toString()
+    };
+
+    await Callapi().postWithToken(data, 'todolist/store');
   }
 }

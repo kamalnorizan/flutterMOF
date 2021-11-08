@@ -57,6 +57,18 @@ class _HomeState extends State<Home> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Home Page'),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () {
+                loadTodoList();
+                _isLoading = true;
+              },
+              icon: const Icon(
+                Icons.refresh,
+              ),
+              label: const Text('Reload'),
+            )
+          ],
         ),
         drawer: Drawer(
           child: ListView(
