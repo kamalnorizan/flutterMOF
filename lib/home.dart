@@ -143,6 +143,7 @@ class _HomeState extends State<Home> {
     setState(() {
       todolists = fromJson(json.encode(body['success']['todolist']));
       _isLoading = false;
+      print(todolists!.length);
     });
   }
 }
