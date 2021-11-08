@@ -8,6 +8,8 @@ import 'package:fluttertutorial/services/api.dart';
 import 'package:fluttertutorial/widgets/productbox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'models/todolist.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -17,35 +19,37 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  List<Todolist>? todolists;
+
   void initState() {
     super.initState();
     print('log here');
     loadTodoList();
   }
 
-  List<Product> products = [
-    Product(
-        name: 'iPhone',
-        description: 'iPhone is the most expensive phone ever',
-        price: 4000,
-        imageName: 'iPhone'),
-    Product(
-        name: 'Laptop',
-        description: 'Laptop is most productive development tool',
-        price: 2500,
-        imageName: 'Laptop'),
-    Product(
-      name: 'Tablet',
-      description: 'Tablet is most productive development tool',
-      price: 2300,
-      imageName: 'Tablet',
-    ),
-    Product(
-      name: 'Pendrive',
-      description: 'Pendrive is a storage medium',
-      price: 20,
-    ),
-  ];
+  // List<Product> products = [
+  //   Product(
+  //       name: 'iPhone',
+  //       description: 'iPhone is the most expensive phone ever',
+  //       price: 4000,
+  //       imageName: 'iPhone'),
+  //   Product(
+  //       name: 'Laptop',
+  //       description: 'Laptop is most productive development tool',
+  //       price: 2500,
+  //       imageName: 'Laptop'),
+  //   Product(
+  //     name: 'Tablet',
+  //     description: 'Tablet is most productive development tool',
+  //     price: 2300,
+  //     imageName: 'Tablet',
+  //   ),
+  //   Product(
+  //     name: 'Pendrive',
+  //     description: 'Pendrive is a storage medium',
+  //     price: 20,
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +84,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: ListView.builder(
-            itemCount: products.length,
+            itemCount: todolists!.length,
             itemBuilder: (BuildContext ctxt, int index) {
               return Slidable(
                 actionPane: const SlidableDrawerActionPane(),
                 child: Productbox(
-                  product: products[index],
+                  todolist: todolists![index],
                 ),
                 secondaryActions: [
                   IconSlideAction(
@@ -94,7 +98,7 @@ class _HomeState extends State<Home> {
                     icon: Icons.delete,
                     onTap: () {
                       setState(() {
-                        products.removeAt(index);
+                        todolists?.removeAt(index);
                       });
                     },
                   )
@@ -104,12 +108,12 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () async {
-            final product = await Navigator.push(
+            final todolist = await Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Productform()),
             );
             setState(() {
-              products.add(product);
+              todolists?.add(todolist);
             });
           },
         ),
@@ -119,7 +123,10 @@ class _HomeState extends State<Home> {
 
   loadTodoList() async {
     var response = await Callapi().getData('todolist');
+    print(response);
     var body = json.decode(response.body);
-    print(body);
+    setState(() {
+      todolists = fromJson(json.encode(body['success']['todolist']));
+    });
   }
 }

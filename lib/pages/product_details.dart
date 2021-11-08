@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertutorial/models/product.dart';
+import 'package:fluttertutorial/models/todolist.dart';
 
 class Productdetails extends StatefulWidget {
-  Productdetails({Key? key, required this.product}) : super(key: key);
-  var product = Product();
+  Productdetails({Key? key, required this.todolist}) : super(key: key);
+  // var product = Todolist();
+  Todolist todolist;
   @override
   State<Productdetails> createState() => _ProductdetailsState();
 }

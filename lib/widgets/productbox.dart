@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorial/models/product.dart';
+import 'package:fluttertutorial/models/todolist.dart';
 import 'package:fluttertutorial/pages/product_details.dart';
 
 class Productbox extends StatelessWidget {
-  Productbox({Key? key, required this.product}) : super(key: key);
+  Productbox({Key? key, required this.todolist}) : super(key: key);
 
-  var product = Product();
+  Todolist todolist;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +25,7 @@ class Productbox extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  product.imageName.toString(),
+                  todolist.title.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -38,22 +39,22 @@ class Productbox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Name: ' + product.name.toString(),
+                      'Title: ' + todolist.title.toString(),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Center(
                         child: Text(
-                      'Description: ' + product.description.toString(),
+                      'Description: ' + todolist.content.toString(),
                       textAlign: TextAlign.center,
                     )),
-                    Text('Price: ' + product.price.toString()),
+                    Text('DueDate: ' + todolist.dueDate.toString()),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    Productdetails(product: product)));
+                                    Productdetails(todolist: todolist)));
                       },
                       child: const Text('View Details'),
                     ),
