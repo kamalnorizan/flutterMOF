@@ -20,7 +20,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   List<Todolist>? todolists;
-
+  var _isLoading = true;
   void initState() {
     super.initState();
     print('log here');
@@ -83,28 +83,32 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: ListView.builder(
-            itemCount: todolists!.length,
-            itemBuilder: (BuildContext ctxt, int index) {
-              return Slidable(
-                actionPane: const SlidableDrawerActionPane(),
-                child: Productbox(
-                  todolist: todolists![index],
-                ),
-                secondaryActions: [
-                  IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.redAccent,
-                    icon: Icons.delete,
-                    onTap: () {
-                      setState(() {
-                        todolists?.removeAt(index);
-                      });
-                    },
-                  )
-                ],
-              );
-            }),
+        body: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: todolists!.length,
+                itemBuilder: (BuildContext ctxt, int index) {
+                  return Slidable(
+                    actionPane: const SlidableDrawerActionPane(),
+                    child: Productbox(
+                      todolist: todolists![index],
+                    ),
+                    secondaryActions: [
+                      IconSlideAction(
+                        caption: 'Delete',
+                        color: Colors.redAccent,
+                        icon: Icons.delete,
+                        onTap: () {
+                          setState(() {
+                            todolists?.removeAt(index);
+                          });
+                        },
+                      )
+                    ],
+                  );
+                }),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () async {
@@ -123,10 +127,11 @@ class _HomeState extends State<Home> {
 
   loadTodoList() async {
     var response = await Callapi().getData('todolist');
-    print(response);
+    // print(response);
     var body = json.decode(response.body);
     setState(() {
       todolists = fromJson(json.encode(body['success']['todolist']));
+      _isLoading = false;
     });
   }
 }
