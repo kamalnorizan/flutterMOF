@@ -112,9 +112,7 @@ class _HomeState extends State<Home> {
                         color: Colors.redAccent,
                         icon: Icons.delete,
                         onTap: () {
-                          setState(() {
-                            todolists?.removeAt(index);
-                          });
+                          deleteTodoList(todolists![index].id, context);
                         },
                       )
                     ],
@@ -143,7 +141,35 @@ class _HomeState extends State<Home> {
     setState(() {
       todolists = fromJson(json.encode(body['success']['todolist']));
       _isLoading = false;
-      print(todolists!.length);
     });
+  }
+
+  deleteTodoList(id, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure you want to remove this item?'),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  var data = {};
+                  var res = await Callapi()
+                      .postWithToken(data, 'todolist/delete/$id');
+                  loadTodoList();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Yes'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('No'),
+              ),
+            ],
+          );
+        });
   }
 }
